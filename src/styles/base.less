@@ -1,0 +1,9 @@
+@import url('./other.less');
+.loopSize(@size) when (@size <=20) {
+  .fz-@{size} {
+    font-size: @size * 1px !important;
+  }
+  .loopSize((@size + 2));
+}
+
+.loopSize(0);
