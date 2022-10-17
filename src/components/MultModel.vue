@@ -1,11 +1,17 @@
 <template>
   <div>
     input first
-    <input :value="firstName" @input="$emit('update:firstName', $event.target?.value)" />
+    <input
+      :value="firstName"
+      @input="$emit('update:firstName', ($event.target as HTMLInputElement).value)"
+    />
   </div>
   <div>
     input second
-    <input :value="secondName" @input="$emit('update:secondName', $event.target?.value)" />
+    <input
+      :value="secondName"
+      @input="$emit('update:secondName', ($event.target as HTMLInputElement).value)"
+    />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div>this is async components</div>
+  <div>this is async components1112</div>
 </template>
 
 <script lang="ts">

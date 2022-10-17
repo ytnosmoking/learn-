@@ -7,17 +7,24 @@ import ErrorCom from '@/components/error.vue';
 import TestOne from '@/components/testOne.vue';
 import MyTrans from '@/components/transition.vue';
 import { ref, computed, onMounted } from 'vue';
-const goDown = (a: any) => {
+const goDown = (a: number) => {
   console.log(a);
 };
-const routes = {
+
+enum RouteName {
+  base = '/',
+  loading = '/loading',
+  error = '/error'
+}
+
+const routes: Record<RouteName, any> = {
   '/': TestOne,
   '/loading': LoadingCom,
   '/error': ErrorCom
 };
-const currentPath = ref(window.location.hash);
+const currentPath = ref<string>(window.location.hash);
 const currentView = computed(() => {
-  return routes[currentPath.value.slice(1) || '/'] || TestOne;
+  return routes[(currentPath.value.slice(1) as RouteName) || RouteName.base] || TestOne;
 });
 onMounted(() => {
   window.addEventListener('hashchange', () => {

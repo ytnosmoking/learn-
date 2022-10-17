@@ -1,4 +1,3 @@
-
 // "browserslist": [
 //   "defaults",
 //   "not ie < 11",
@@ -19,6 +18,4 @@ module.exports = {
     // require('autoprefixer'),
     require('postcss-preset-env') // css 已经加载了autoprefixer
   ]
-}
-
-
+};

@@ -11,17 +11,19 @@ import TransCom from '@/components/transition.vue';
 import classes from '../styles/module/test.module.css';
 import { useMouse } from '@/hooks/mouse';
 import { useCalc } from '@/hooks/calc';
+import AsyncTest from './AsyncTest';
 
-defineProps<{ msg: string }>();
+defineProps<{ msg: string; title: string }>();
 
 const AsyncCom = defineAsyncComponent({
-  loader: () => {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        return resolve(import('./asyncComponent.vue'));
-      }, 10000);
-    });
-  },
+  // loader: () => {
+  //   return new Promise(resolve => {
+  //     setTimeout(() => {
+  //       return resolve(import('./asyncComponent.vue'));
+  //     }, 10000);
+  //   });
+  // },
+  loader: () => import('./asyncComponent.vue'),
   loadingComponent: LoadingCom,
   delay: 200,
 
@@ -29,7 +31,7 @@ const AsyncCom = defineAsyncComponent({
   errorComponent: ErrorCom,
   // 如果提供了一个 timeout 时间限制，并超时了
   // 也会显示这里配置的报错组件，默认值是：Infinity
-  timeout: 20
+  timeout: 12000
 });
 
 // console.log($attrs)
@@ -39,8 +41,8 @@ const secondName = ref(0);
 const ffirstName = ref(0);
 const ssecondName = ref(0);
 const count = ref(0);
-const title = ref<string | number>(1234);
-const attrs: any = useAttrs();
+const title = ref<string | number>('');
+const attrs: Record<string, any> = useAttrs();
 onMounted(() => {
   const tag = document.getElementById('test');
   (tag as HTMLElement).className = classes.big;
@@ -52,6 +54,8 @@ const testclick = () => {
   console.log(num);
   console.log(11);
   console.log(attrs);
+  console.log(attrs.title);
+  console.log(attrs.onGoDown);
   attrs['onGoDown'](3);
   count.value = 2;
 };
@@ -65,6 +69,7 @@ const xy = computed(() => useX.value + ':' + useY.value);
 </script>
 
 <template>
+  <AsyncTest />
   <AsyncCom />
   <button @click="showTrans = !showTrans">toggle showTrans --{{ showTrans }}</button>
   <TransCom>

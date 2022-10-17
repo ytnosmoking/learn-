@@ -3,10 +3,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, Ref } from 'vue';
 
-const x = ref(0);
-const y = ref(0);
+const x: Ref<number> = ref(0);
+const y = ref<number>(0);
 const update = (event: MouseEvent) => {
   x.value = event.pageX;
   y.value = event.pageY;

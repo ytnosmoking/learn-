@@ -12,7 +12,9 @@ interface Props {
   title: string | number;
 }
 
-defineProps<Props>();
+withDefaults(defineProps<Props>(), {
+  title: 'this is default title'
+});
 const emit = defineEmits(['doClick']);
 
 const clickTwo = () => {
